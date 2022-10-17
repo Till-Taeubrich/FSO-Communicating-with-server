@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import uniqid from 'uniqid'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
 
@@ -49,29 +52,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with: <input onChange={handleFiltering} />
-      </div>
+      <Filter handleFiltering={handleFiltering} />
       <h2>add a new</h2>
-      <form>
-        <div>
-          name: <input onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button onClick={addPerson} type="submit">
-            add
-          </button>
-        </div>
-      </form>
+      <PersonForm handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} addPerson={addPerson}/>
       <h2>Numbers</h2>
-      {persons.map((person) => (
-        <div key={person.id}>
-          {person.name} {person.number}
-        </div>
-      ))}
+      <Persons persons={persons}/>
     </div>
   );
 }
