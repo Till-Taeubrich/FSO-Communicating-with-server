@@ -4,13 +4,18 @@ import uniqid from 'uniqid'
 const App = () => {
 
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', id: uniqid() }
+    { name: 'Arto Hellas', id: uniqid(), number: '040-123456' }
   ]) 
 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   
   const handleNameChange = (e) => {
     setNewName(e.target.value)
+  }
+
+  const handleNumberChange = (e) => {
+    setNewNumber(e.target.value)
   }
 
   const addPerson = (e) => {
@@ -19,6 +24,7 @@ const App = () => {
     const newPerson = {
       name: newName,
       id: uniqid(),
+      number: newNumber,
     }
 
     if (persons.find((person) => person.name === newName)) {
@@ -37,12 +43,15 @@ const App = () => {
           name: <input onChange={handleNameChange} />
         </div>
         <div>
+          number: <input onChange={handleNumberChange} />
+        </div>
+        <div>
           <button onClick={addPerson} type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       {persons.map(person => 
-        <div key={person.id}>{person.name}</div>
+        <div key={person.id}>{person.name} {person.number}</div>
         )}
     </div>
   )
