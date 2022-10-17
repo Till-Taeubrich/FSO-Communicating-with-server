@@ -2,6 +2,7 @@ import { useState } from 'react'
 import uniqid from 'uniqid'
 
 const App = () => {
+
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', id: uniqid() }
   ]) 
@@ -18,6 +19,11 @@ const App = () => {
     const newPerson = {
       name: newName,
       id: uniqid(),
+    }
+
+    if (persons.find((person) => person.name === newName)) {
+      alert(`${newName} is already added to phonebook`)
+      return
     }
 
     setPersons(persons.concat(newPerson))
