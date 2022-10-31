@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-import CountryList from './CountryList';
+import React from 'react'
 
-export default function Searchbar({instruction, countryData}) {
+export default function Searchbar({instruction, countryData, setFilteredCountries}) {
 
-  const [filteredCountries, setFilteredCountries] = useState([])
   const filterCountries = (e) => {
     const matchedCountries = countryData.filter((country) => {
       return country.name.common.includes(e.target.value)
@@ -16,7 +14,6 @@ export default function Searchbar({instruction, countryData}) {
     <>
       <div>{instruction}</div>
       <input onChange={ filterCountries }/>
-      <CountryList filteredCountries={filteredCountries}/>
     </>
   );
 }
