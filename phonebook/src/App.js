@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import uniqid from 'uniqid'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import personServices from './services/persons'
 
 const App = () => {
 
@@ -12,8 +12,10 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:3001/persons').then((response) => {
-      setPersons(response.data);
+    personServices
+      .getAll()
+      .then((initialPersons) => {
+      setPersons(initialPersons);
     });
   }, [])
   
@@ -47,7 +49,7 @@ const App = () => {
       return
     }
 
-    axios.post('http://localhost:3001/persons', newPerson)
+    personServices.create(newPerson)
   }
 
   return (
