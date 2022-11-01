@@ -39,7 +39,6 @@ const App = () => {
 
     const newPerson = {
       name: newName,
-      id: uniqid(),
       number: newNumber,
     }
 
@@ -48,7 +47,7 @@ const App = () => {
       return
     }
 
-    setPersons(persons.concat(newPerson))
+    axios.post('http://localhost:3001/persons', newPerson)
   }
 
   return (
