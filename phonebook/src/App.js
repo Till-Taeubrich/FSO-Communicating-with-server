@@ -44,8 +44,12 @@ const App = () => {
       number: newNumber,
     }
 
-    if (persons.find((person) => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+    const existingPerson = persons.find((person) => person.name === newName)
+
+    if (existingPerson) {
+      if (window.confirm(`${existingPerson.name} is already added to phonebook, replace the old number with a new one?`)) {
+        personServices.update(existingPerson.name, newNumber, existingPerson.id)
+      }
       return
     }
 
