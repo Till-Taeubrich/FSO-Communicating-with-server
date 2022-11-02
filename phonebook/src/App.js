@@ -11,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [message, setMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState(false)
 
   useEffect(() => {
     personServices
@@ -49,7 +50,7 @@ const App = () => {
 
     if (existingPerson) {
       if (window.confirm(`${existingPerson.name} is already added to phonebook, replace the old number with a new one?`)) {
-        personServices.update(existingPerson.name, newNumber, existingPerson.id)
+        personServices.update(existingPerson.name, newNumber, existingPerson.id, setErrorMessage, setMessage, resetMessage)
         setMessage(`${existingPerson.name}'s number is updated`)
         resetMessage()
       }
@@ -68,13 +69,14 @@ const App = () => {
   const resetMessage = () => {
     setTimeout(() => {
       setMessage('')
+      setErrorMessage(false)
     }, 5000);
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification message={message} errorMessage={errorMessage} />
       <Filter handleFiltering={handleFiltering} />
       <h2>add a new</h2>
       <PersonForm handleNameChange={handleNameChange} handleNumberChange={handleNumberChange} addPerson={addPerson}/>
