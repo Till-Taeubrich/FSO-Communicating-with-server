@@ -1,22 +1,23 @@
 import axios from "axios";
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = 'http://localhost:3001'
+const personUrl = 'http://localhost:3001/api/persons'
 
 const getAll = () => {
-  return axios.get(baseUrl)
+  return axios.get(personUrl)
     .then((response) => {
       return response.data
     })
 }
 
 const create = (newPerson) => {
-  return axios.post(baseUrl, newPerson)
+  return axios.post(personUrl, newPerson)
     .then((response) => {
       return response.data
     })
 }
 
 const remove = (id) => {
-  axios.delete(`${baseUrl}/${id}`)
+  axios.delete(`${personUrl}/${id}`)
 }
 
 const update = (name, newNumber, id, setErrorMessage, setMessage, resetMessage) => {
@@ -25,7 +26,7 @@ const update = (name, newNumber, id, setErrorMessage, setMessage, resetMessage) 
     number: newNumber,
     id,
   }
-  axios.put(`${baseUrl}/${id}`, data)
+  axios.put(`${personUrl}/${id}`, data)
     .then(() => {})
     .catch((error) => {
       setErrorMessage(true)
