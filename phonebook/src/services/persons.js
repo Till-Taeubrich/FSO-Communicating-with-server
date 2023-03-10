@@ -10,9 +10,12 @@ const getAll = () => {
 
 const create = (newPerson) => {
   return axios.post(personUrl, newPerson)
-    .then((response) => {
-      return response.data
-    })
+  .then((response) => {
+    return response.data
+  })
+  .catch(() => {
+    return
+  });
 }
 
 const remove = (id) => {
