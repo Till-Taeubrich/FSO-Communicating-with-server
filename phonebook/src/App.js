@@ -64,7 +64,7 @@ const App = () => {
     personServices.create(person).then(res => {
       if (res === undefined) {
         setErrorMessage(true)
-        setMessage('Name is shorter than the minimum allowed length (3).')
+        setMessage('Adding new contact failed')
       } else {
         setMessage(`Added ${person.name}`)
       }
